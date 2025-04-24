@@ -7,32 +7,7 @@ from prompts import JSON_INSTRUCTION, JSON_ADDITIONAL_INSTRUCTION,ENGLISH_INSTRU
 
 app = Flask(__name__)
 
-client = OpenAI(api_key="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")
-
-# data = [
-#     {
-#         "first_name": {
-#             "type": "string",
-#         },
-#         "last_name": {
-#             "type": "string",
-#         },
-#     },
-#     {
-#         "country_code": {
-#             "type": "string",
-#             "description": "Phone number country code. For example, 1 for US, 34 for Spain"
-#         },
-#         "phone_number": {"type": "string"},
-#     },
-#     {
-#         "country": {"type": "string"},
-#         "state": {"type": "string"},
-#         "city": {"type": "string"},
-#         "address": {"type": "string"},
-#         "zip": {"type": "string"},
-#     }
-# ]
+client = OpenAI(api_key="<openai api key>")
 
 data=[
   {
@@ -182,18 +157,6 @@ def get_english_message(block_index, problems):
     response = client.responses.create(
         model="gpt-4o-mini",
         input=input_
-        # instructions=instructions,
-        # input=f"FIELDS: {json.dumps(get_fields_without_value(block_index))}",
-        # input=[
-        #     {
-        #         "role":"developer",
-        #         "content":instructions
-        #     },
-        #     {
-        #         "role":"user",
-        #         "content":prompt
-        #     }
-        # ],
     )
     return response.output_text
 
@@ -260,17 +223,3 @@ def chat():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-    #     block_index = data["block_index"]
-    # else:
-    #     if is_block_last(block_index):  # otherwise, it is guaranteed that the current block is finished, so we need to go to the next one
-    #         return jsonify({  # if this was the last block, return success
-    #             "response": "Application completed successfully"
-    #         }), 200
-    #     else:  # otherwise, add the next block to the response
-    #         block_index = data["block_index"] + 1
-
-    # response = get_english_message(block_index)
-    # return jsonify({
-    #     "response": response
-    # }), 200
